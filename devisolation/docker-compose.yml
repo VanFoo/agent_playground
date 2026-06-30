@@ -1,0 +1,52 @@
+services:
+  devcontainer:
+    build:
+      context: ./devcontainer
+    volumes:
+      - ${HOST_PROJECT_PATH}:/workspace:cached
+      # Claude Code login state and shell history survive container
+      # rebuilds via named Docker volumes — never the host's real ~/.claude.
+      - claude-config:/home/vscode/.claude
+      - command-history:/commandhistory
+    environment:
+      - HTTP_PROXY=http://firewall:3128
+      - HTTPS_PROXY=http://firewall:3128
+      - NO_PROXY=localhost,127.0.0.1
+      - HISTFILE=/commandhistory/.bash_history
+    networks:
+      - internal
+    depends_on:
+      firewall:
+        condition: service_healthy
+    # Keeps the container alive for `devcontainer exec` / VS Code attach.
+    command: sleep infinity
+
+  firewall:
+    build:
+      context: ./firewall
+    volumes:
+      - ./firewall/squid.conf:/etc/squid/squid.conf:ro
+      - ./firewall/whitelist.txt:/etc/squid/whitelist.txt:ro
+      - firewall-logs:/var/log/squid
+    networks:
+      - internal
+      - egress
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "nc", "-z", "127.0.0.1", "3128"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+networks:
+  # No internet route at all — this is the actual isolation boundary.
+  # `devcontainer` can only reach `firewall`, nothing else.
+  internal:
+    internal: true
+  # The only network with real internet access. Only `firewall` is on it.
+  egress: {}
+
+volumes:
+  claude-config:
+  command-history:
+  firewall-logs:
