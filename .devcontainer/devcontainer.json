@@ -1,5 +1,5 @@
 {
-  "name": "ResearchAgent",
+  "name": "AgentPlayground",
   "image": "mcr.microsoft.com/devcontainers/typescript-node:latest",
   "features": {
     "ghcr.io/anthropics/devcontainer-features/claude-code:latest": {},
