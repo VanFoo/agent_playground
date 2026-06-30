@@ -1,0 +1,26 @@
+{
+  "skill_name": "family-vacation-planner",
+  "evals": [
+    {
+      "id": 1,
+      "name": "beach-pool-4yo-chicago",
+      "prompt": "We're planning a trip for me, my husband, and our 4-year-old daughter this summer. Budget is around $4000 total for a week, flying out of Chicago. She loves the beach and pools but gets bored without other kids around. Where should we go?",
+      "expected_output": "Interview confirms/clarifies child age, budget, dates, departure city, interests before researching. Multiple narrowing rounds (region/style, then style/budget) before a final list. Final list has at least 5 specific named hotels/resorts with location, link, price range, kid amenities (esp. kids' club / other-kids-present signal), and a rationale tied to a 4-year-old and the stated budget/origin.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "europe-kidsclub-8-11yo-london",
+      "prompt": "Looking for a family-friendly resort in Europe for me and my 8 and 11 year old sons, around 2 weeks in August, budget flexible but ideally under £6000 total, flying from London. We want something with a good kids' club so the adults can actually relax too.",
+      "expected_output": "Interview confirms both children's ages, the 2-week duration, budget ceiling, London departure, and the kids'-club priority. Final list has at least 5 specific named European resorts/hotels with location, link, price range, explicit kids' club age-band coverage for ages 8 and 11, and rationale.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "name": "toddler-twins-driving-denver",
+      "prompt": "My partner and I want to take our twin 2-year-olds on their first 'real' vacation. Thinking domestic US, driving distance from Denver, sometime in the fall, budget under $2500 for 5 days. Not sure where toddlers would even be welcome honestly.",
+      "expected_output": "Interview confirms twins' age (2), driving-distance constraint from Denver, fall timing, budget, and surfaces toddler-specific concerns (e.g. pack-and-plays, kid-friendly but not over-stimulating). Final list has at least 5 specific named domestic properties reachable by car from Denver, with location, link, price range, toddler-relevant amenities, and rationale.",
+      "files": []
+    }
+  ]
+}
